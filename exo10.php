@@ -17,6 +17,7 @@ $metier = array("Développeur Logiciel", "Designer web", "Intégrateur", "Chef d
 
 
 echo "<form>";
+
 function afficherInput($infoPersonne) {
     foreach ($infoPersonne as $nom) {
         echo "<label>" . $nom . " :<br></label>";
@@ -35,6 +36,7 @@ function afficherSexe($sexe) {
     }
     echo "</fieldset>";
 }
+
 echo "</form>";
 
 
