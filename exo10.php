@@ -37,7 +37,6 @@ function afficherSexe($sexe) {
     echo "</fieldset>";
 }
 
-echo "</form>";
 
 
 function metierListeDeroulante($metier) {
@@ -50,6 +49,8 @@ function metierListeDeroulante($metier) {
     echo "</select>";
 }
 
+echo "</form>";
+
 afficherInput($infoPersonne);
 afficherSexe($sexe);
 metierListeDeroulante($metier);
@@ -57,3 +58,4 @@ metierListeDeroulante($metier);
 echo "<div>
         <input type='submit' 'value='Submit!'/>
       </div>";
+
