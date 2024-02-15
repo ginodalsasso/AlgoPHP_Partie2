@@ -14,17 +14,18 @@ class Voiture {
     private string $marque;
     private string $modele;
     private string $nbPortes;
-    private string $vitesseActuelle;
+    private int $vitesseActuelle;
 
-    public function __construct(string $marque, string $modele, string $nbPorte, string $vitesseActuelle){
+    public function __construct(string $marque, string $modele, string $nbPortes){
         $this->marque = $marque;
         $this->modele = $modele;
-        $this->nbPorte = $nbPorte;
-        $this->vitessteActuelle = $vitesseActuelle;
+        $this->nbPortes = $nbPortes;
+        $this->vitesseActuelle = 0;  //initialisation à 0 (sortie d'usine)
     }
 
 
-    public function getMarque(){
+    public function getMarque(): string
+    {
         return $this->marque;
     }
 
@@ -34,7 +35,8 @@ class Voiture {
     }
 
 
-    public function getModele(){
+    public function getModele(): string
+    {
         return $this->modele;
     }
 
@@ -44,7 +46,8 @@ class Voiture {
     }
 
  
-    public function getNbPortes(){
+    public function getNbPortes(): string
+    {
         return $this->nbPortes;
     }
 
@@ -54,7 +57,8 @@ class Voiture {
     }
 
 
-    public function getVitesseActuelle(){
+    public function getVitesseActuelle(): int
+    {
         return $this->vitesseActuelle;
     }
 
@@ -64,7 +68,88 @@ class Voiture {
     }
 
 
+    // Ici je crée une fonction me permettant de vérifier les informations globales qui ne changeront pas.
     public function getInfos(){
-        return $this . ""
+        return "Nom et modèle du véhicule : ". $this . "<br/>Nombre de portes : " . $this->nbPortes ."<br/>";
+    }
+  
+
+    // Ici je crée une fonction me permettant de vérifier si le véhicule est démarre.
+    public function demarrer() {
+        if ($this->vitesseActuelle == 0) {
+            return "Le véhicule " . $this->marque . " démarre<br/>";
+         }
+    }
+
+    // Ici je crée une fonction me permettant d'accélerer le véhicule.
+    public function accelerer($vitesse) {
+        switch (true) {
+            case $vitesse > 1:
+                $this->vitesseActuelle += $vitesse;
+                return "Le véhicule " . $this->marque . " accélère de " . $this->vitesseActuelle . " km/h<br/>";
+            default:
+                return "Pour accélérer, il faut démarrer le véhicule ";
+        }
+    }
+
+    // Ici je crée une fonction me permettant de ralentir le véhicule.
+    public function ralentir($vitesse) {
+        if ($vitesse > 1 && $this->vitesseActuelle >= $vitesse) {
+            $this->vitesseActuelle -= $vitesse;
+            return "Le véhicule " . $this->marque . " ralentit de " . $this->vitesseActuelle . " km/h<br/>";
+        } else {
+            return "Impossible de ralentir en dessous de 0 km/h !<br/>";
+        }
+    }
+
+
+    // Ici je crée une fonction me permettant de vérifier si le véhicule  est stoppé.
+    public function stopper() {
+        $this->vitesseActuelle = 0;
+        return "Le véhicule " . $this->marque . " est stoppé<br/>";
+    }
+
+    
+    // Ici je crée une fonction  me donnant la vitesse du véhicule.
+    public function afficherVitesse(){
+        return "La vitesse du véhicule " . $this . " est de : " . $this->vitesseActuelle ." km/h <br/>";
+    }    
+
+
+    //fonction toString afin de fusionner la marque et le modèle étant cités plusieurs fois.
+    public function __toString(){
+        return $this->marque ." ". $this->modele;
     }
 }
+
+
+$v1 = new Voiture ("Peugeot", "408", "5");
+$v2 = new Voiture ("Citroën", "C4", "3");
+
+
+
+
+echo "<h2>Tests véhicules</h2>*******************<br/>";
+
+echo $v1->demarrer();
+echo $v1->accelerer(50); //  accélère de 50 km/h
+
+
+echo $v2->demarrer();
+echo $v2->stopper();
+echo $v2->accelerer(20); 
+echo $v2->ralentir(20);// ralenti de 20 km/h
+
+
+echo $v1->afficherVitesse(); // Affiche la vitesse actuelle
+
+echo "<h2>Infos véhicule 1</h2>*******************<br/>";
+echo $v1->getInfos();
+echo $v1->afficherVitesse();
+
+echo "<h2>Infos véhicule 2</h2>*******************<br/>";
+echo $v2->getInfos();
+echo $v2->afficherVitesse();
+
+
+
