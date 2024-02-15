@@ -7,12 +7,12 @@ nouvel onglet et le tableau sera trié par ordre alphabétique de la capitale).<
 
 <?php
 
-$capitales = [
-    "France" => ["ville" => "paris", "lien" => "https://fr.wikipedia.org/wiki/Paris"],
-    "Allemagne" => ["ville" => "berlin", "lien" => "https://en.wikipedia.org/wiki/Berlin"],
-    "USA" => ["ville" => "washington", "lien" => "https://en.wikipedia.org/wiki/Washington,_D.C."],
-    "Italie" => ["ville" => "rome", "lien" => "https://en.wikipedia.org/wiki/Rome"],
-    "Espagne" => ["ville" => "madrid", "lien" => "https://en.wikipedia.org/wiki/Madrid"]
+$capitales =[
+    "France" => "paris",
+    "Allemagne" => "berlin",
+    "USA" => "washington",
+    "Italie" => "rome",
+    "Espagne" => "madrid"
 ];
 
 echo afficherTableHTML($capitales);
@@ -30,11 +30,11 @@ function afficherTableHTML($capitales){
                     </thead>
                     <tbody>";
 
-    foreach ($capitales as $pays => $wiki) {
+    foreach ($capitales as $pays => $ville) {
         $result .= "<tr>
                         <td>" . mb_strtoupper($pays) . "</td>
-                        <td>" . ucfirst($wiki['ville']) . "</td>
-                        <td><a href='" . $wiki['lien'] . "' target='_blank'>Lien</a></td> 
+                        <td>" . ucfirst($ville) . "</td>
+                        <td><a href=' https://en.wikipedia.org/wiki/. $ville . ' target='_blank'>Lien</a></td> 
                     </tr>";
     }
 
